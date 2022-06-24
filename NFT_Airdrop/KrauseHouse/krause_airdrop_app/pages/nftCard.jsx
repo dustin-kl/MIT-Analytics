@@ -4,10 +4,17 @@ import Image from "next/image";
 import SportsBasketballIcon from "@mui/icons-material/SportsBasketball";
 import Checkbox from "@mui/material/Checkbox";
 
-export const NFTCard = ({ pic, checked, setChecked }) => {
+export const NFTCard = ({ index, pic, checked, setChecked }) => {
+  const image_urls = [
+    "https://ipfs.io/ipfs/QmVkeHRawmKAK8yLBjHwGDHQ2XWKWNPqSYM8Fqcpk9m2YP?filename=NFT_1.gif",
+    "https://ipfs.io/ipfs/QmPhkFLfRxwmqca7twP9ZsV3VcNi3u74eg36d7KvDbpdpg?filename=NFT_2.jpg",
+    "https://ipfs.io/ipfs/QmWDiToGNKUJ2eDStMTHaV5DzuKWKcmfDAmkEBHj5QUmgE?filename=NFT_3.gif",
+    "https://ipfs.io/ipfs/Qmck4RTiYpdp7m6M47Nc6QRQvdpqRhydmpG52BncaKAdDL?filename=NFT_4.jpg",
+  ];
+
   const handleChange = (event) => {
     if (event.target.checked) {
-      setChecked(pic);
+      setChecked(image_urls[index]);
     }
   };
   return (
@@ -37,7 +44,7 @@ export const NFTCard = ({ pic, checked, setChecked }) => {
           }}
         >
           <Checkbox
-            checked={checked == pic}
+            checked={checked == image_urls[index]}
             onChange={handleChange}
             sx={{
               "& .MuiSvgIcon-root": {
@@ -54,7 +61,7 @@ export const NFTCard = ({ pic, checked, setChecked }) => {
             }
           />
 
-          {checked == pic ? (
+          {checked == image_urls[index] ? (
             <h3
               style={{
                 fontSize: "17px",

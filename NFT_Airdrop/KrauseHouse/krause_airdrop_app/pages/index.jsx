@@ -12,6 +12,7 @@ import mypic4 from "../public/images/NFT_4.jpg";
 import { withStyles, makeStyles } from "@material-ui/core/styles";
 import styles from "./Test.module.css";
 import { mintNFT } from "./util/minter.js";
+import { pinJSONToIPFS } from "./util/pinata.js";
 
 const useStyles = makeStyles({
   root: {
@@ -26,24 +27,44 @@ const useStyles = makeStyles({
 
 export default function Home() {
   const classes = useStyles();
-  const [description, setDescription] = useState("");
+  const [description, setDescription] = useState(
+    "Hey Basketball Fan! Our mission is to own an NBA team and we would love to have you join us and become part of the team 🏀 🚀"
+  );
+
   const [listSent, setListSent] = useState([]);
   const [selectionModel, setSelectionModel] = useState([]);
   const [background1, setBackground1] = useState("white");
   const [checked, setChecked] = useState("");
 
+  async function changeDescription() {
+    setDescription(document.getElementById("desc").value);
+  }
+
+  async function mint(add, tokenURI) {
+    const raw = await mintNFT(add, tokenURI);
+    return raw;
+  }
+
   async function execute() {
+    const metadata = new Object();
+    metadata.name = name;
+    metadata.image = checked;
+    metadata.description = description;
 
-setDescription(document.getElementById("desc").value))
+    const pinataResponse = await pinJSONToIPFS(metadata);
+    if (!pinataResponse.success) {
+      return {
+        success: false,
+        status: "😢 Something went wrong while uploading your tokenURI.",
+      };
+    }
+    const tokenURI = pinataResponse.pinataUrl;
+
     selectionModel.map((nft_id, index) => {
-      
-
-      console.log(rows[nft_id]["address"]);
+      const add = rows[nft_id]["address"];
+      const raw = mint(add);
+      console.log("Raw: ", raw);
     });
-
-    console.log(selectionModel);
-    console.log(rows);
-    console.log(rows[2]["address"]);
   }
 
   const columns = [
@@ -236,21 +257,25 @@ setDescription(document.getElementById("desc").value))
         }}
       >
         <NFTCard
+          index={0}
           pic={mypic1}
           checked={checked}
           setChecked={setChecked}
         ></NFTCard>
         <NFTCard
+          index={1}
           pic={mypic2}
           checked={checked}
           setChecked={setChecked}
         ></NFTCard>
         <NFTCard
+          index={2}
           pic={mypic3}
           checked={checked}
           setChecked={setChecked}
         ></NFTCard>
         <NFTCard
+          index={3}
           pic={mypic4}
           checked={checked}
           setChecked={setChecked}
@@ -309,6 +334,7 @@ setDescription(document.getElementById("desc").value))
           style={{ width: "100%", borderRadius: "4px", height: "90px" }}
           defaultValue="Hey Basketball Fan! Our mission is to own an NBA team and we would
           love to have you join us and become part of the team 🏀 🚀"
+          onChange={() => changeDescription()}
         ></textarea>
       </div>
 
