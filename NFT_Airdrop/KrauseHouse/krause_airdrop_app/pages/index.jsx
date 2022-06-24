@@ -1,25 +1,17 @@
+import React from "react";
 import Head from "next/head";
 import Image from "next/image";
-import { useWeb3React } from "@web3-react/core";
-import { InjectedConnector } from "@web3-react/injected-connector";
-import { abi } from "../constants/abi";
 import { useState, useEffect } from "react";
-import { ethers } from "ethers";
 import { DataGrid } from "@material-ui/data-grid";
 import myData from "../../target_users.json";
 import { NFTCard } from "./nftCard.jsx";
 import mypic1 from "../public/images/NFT_1.gif";
-import mypic2 from "../public/images/NFT_2.gif";
-import mypic3 from "../public/images/NFT_3.jpg";
+import mypic2 from "../public/images/NFT_2.jpg";
+import mypic3 from "../public/images/NFT_3.gif";
 import mypic4 from "../public/images/NFT_4.jpg";
-import mypic5 from "../public/images/NFT_5.gif";
-import { MintButton } from "./mintButton";
 import { withStyles, makeStyles } from "@material-ui/core/styles";
 import styles from "./Test.module.css";
-import Link from 'next/link';
-
-
-export const injected = new InjectedConnector();
+import { mintNFT } from "./util/minter.js";
 
 const useStyles = makeStyles({
   root: {
@@ -34,63 +26,24 @@ const useStyles = makeStyles({
 
 export default function Home() {
   const classes = useStyles();
-  const [hasMetamask, setHasMetamask] = useState(false);
+  const [description, setDescription] = useState("");
   const [listSent, setListSent] = useState([]);
   const [selectionModel, setSelectionModel] = useState([]);
   const [background1, setBackground1] = useState("white");
   const [checked, setChecked] = useState("");
 
-  useEffect(() => {
-    if (typeof window.ethereum !== "undefined") {
-      setHasMetamask(true);
-    }
-  });
-
-  useEffect(() => {
-    if (background1 == "white") {
-      setBackground1("green");
-    } else {
-      setBackground1("white");
-    }
-  }, [hasMetamask]);
-
-  const {
-    active,
-    activate,
-    chainId,
-    account,
-    library: provider,
-  } = useWeb3React();
-
-  async function connect() {
-    if (typeof window.ethereum !== "undefined") {
-      try {
-        await activate(injected);
-        setHasMetamask(true);
-      } catch (e) {
-        console.log(e);
-      }
-    }
-  }
-
   async function execute() {
-    console.log("execute");
-    //if (document.querySelector('phone').length > 0) {
-    const description = document.getElementById('phone');
-    console.log(description.value);
-    //}
-    if (active) {
-      const signer = provider.getSigner();
-      const contractAddress = "0x5FbDB2315678afecb367f032d93F642f64180aa3";
-      const contract = new ethers.Contract(contractAddress, abi, signer);
-      try {
-        await contract.store(42);
-      } catch (error) {
-        console.log(error);
-      }
-    } else {
-      console.log("Please install MetaMask");
-    }
+
+setDescription(document.getElementById("desc").value))
+    selectionModel.map((nft_id, index) => {
+      
+
+      console.log(rows[nft_id]["address"]);
+    });
+
+    console.log(selectionModel);
+    console.log(rows);
+    console.log(rows[2]["address"]);
   }
 
   const columns = [
@@ -129,14 +82,13 @@ export default function Home() {
 
   const rows = Object.keys(myData).map((add, index) => {
     return {
-      id: index + 1,
+      id: index,
       address: add,
       sent: listSent.includes(add) ? true : false,
-      balance: myData[add][1].toFixed(3),
+      balance: myData[add][1].toFixed(2),
       nfts: myData[add][0],
     };
   });
-  console.log(selectionModel);
 
   return (
     <div
@@ -151,31 +103,6 @@ export default function Home() {
         <Head>
           <link rel="stylesheet" href="https://use.typekit.net/fox1qde.css" />
         </Head>
-      </div>
-      <div>
-        {hasMetamask ? (
-          active ? (
-            <div></div>
-          ) : (
-            <button
-              className={styles.btn}
-              style={{
-                height: "80px",
-                width: "200px",
-                fontSize: "18px",
-                marginTop: "30px",
-                marginRight: "30px",
-                float: "right",
-                fontFamily: "SK Cuber",
-              }}
-              onClick={() => connect()}
-            >
-              Connect Metamask
-            </button>
-          )
-        ) : (
-          "Please install metamask"
-        )}
       </div>
 
       <div
@@ -314,12 +241,12 @@ export default function Home() {
           setChecked={setChecked}
         ></NFTCard>
         <NFTCard
-          pic={mypic3}
+          pic={mypic2}
           checked={checked}
           setChecked={setChecked}
         ></NFTCard>
         <NFTCard
-          pic={mypic5}
+          pic={mypic3}
           checked={checked}
           setChecked={setChecked}
         ></NFTCard>
@@ -378,12 +305,11 @@ export default function Home() {
           Feel free to modify the Placeholder:
         </p>
         <textarea
-          id="phone"
+          id="desc"
           style={{ width: "100%", borderRadius: "4px", height: "90px" }}
-        >
-          Hey Basketball Fan! Our mission is to own an NBA team and we would
-          love to have you join us and become part of the team 🏀 🚀
-        </textarea>
+          defaultValue="Hey Basketball Fan! Our mission is to own an NBA team and we would
+          love to have you join us and become part of the team 🏀 🚀"
+        ></textarea>
       </div>
 
       <div
@@ -451,11 +377,9 @@ export default function Home() {
               marginRight: "30px",
               fontFamily: "SK Cuber",
             }}
-          //onClick={() => execute()}
+            onClick={() => execute()}
           >
-            <Link href="/Dashboard">
-              <a>Track Conversion</a>
-            </Link>
+            Track Conversion
           </button>
         </div>
       </div>
