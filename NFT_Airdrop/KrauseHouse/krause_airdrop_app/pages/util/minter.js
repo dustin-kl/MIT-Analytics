@@ -1,4 +1,4 @@
-require("dotenv").config();
+require("dotenv").config;
 import { pinJSONToIPFS } from "./pinata.js";
 import { ethers } from "ethers";
 const contractABI = require("./contract-abi.json");

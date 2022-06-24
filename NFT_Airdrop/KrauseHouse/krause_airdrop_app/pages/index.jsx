@@ -12,6 +12,8 @@ import mypic4 from "../public/images/NFT_4.jpg";
 import { withStyles, makeStyles } from "@material-ui/core/styles";
 import styles from "./Test.module.css";
 import { mintNFT } from "./util/minter.js";
+import Link from 'next/link'
+import LockIcon from '@mui/icons-material/Lock';
 
 const useStyles = makeStyles({
   root: {
@@ -34,9 +36,8 @@ export default function Home() {
 
   async function execute() {
 
-setDescription(document.getElementById("desc").value))
+    setDescription(document.getElementById("desc").value);
     selectionModel.map((nft_id, index) => {
-      
 
       console.log(rows[nft_id]["address"]);
     });
@@ -371,6 +372,7 @@ setDescription(document.getElementById("desc").value))
           <button
             className={styles.btn2}
             style={{
+              opacity: "0.3",
               height: "120px",
               width: "350px",
               fontSize: "30px",
@@ -379,8 +381,12 @@ setDescription(document.getElementById("desc").value))
             }}
             onClick={() => execute()}
           >
-            Track Conversion
+            <Link href="/Dashboard">
+              <a>Track Conversion</a>
+            </Link>
           </button>
+          <LockIcon
+            style={{ 'color': "white", 'position': "top" }} /><br></br>
         </div>
       </div>
     </div>
