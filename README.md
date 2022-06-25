@@ -20,7 +20,7 @@ As the NFT market has been growing incredibly fast over the last years, the amou
 We are using state-of-the-art machine learning techniques to build a powerful recommendation engine consisting of content-based filtering as well as collaborative filtering.
 
 # Prototype
-We have build a first prototype in [a link](https://github.com/user/repo/blob/branch/other_file.md)
+We have build a first prototype in [recommender_demo]([https://github.com/user/repo/blob/branch/other_file.md](https://github.com/dustin-kl/MIT-Analytics/tree/master/NFT_Recommendation/recommender_demo))
 
 # Recommendation
 Using the embeddings, we build a recommendation engine above. 
