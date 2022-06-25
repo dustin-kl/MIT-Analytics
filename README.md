@@ -1,10 +1,26 @@
-# NFT_Embedding
 
-# Fetch_Data
-Fetching Image and Description data from the ethereum blockchain
+We fetch the publicly available data on the Ethereum Blockchain to build an analytics layer on top of it resulting in multiple products for different players in the ecosystem.
 
-# Embedding Data
-Using state-of-the-art Neural Networks for Image reduction and Natural language processing, we find a meaningful embedding in latent space.
+# NFT_Airdrop
+Using the ethereum data we cluster users (wallet addresses) and find the perfect DAO for them. We are doing so by searching the NFTs the wallet address currently holds or previously held and match it with the topic of the DAO.
+
+## Airdrop Tool
+We build a userfriendly webpage interface for customizing the NFTs the DAOs can send as an inventation to their potential members.
+The Airdrop will be handled automatically by the smart contract we have deployed earlier on the ethereum blockchain.
+This Airdrop Tool can be found in the Krause House directory, as the Krause House was the first DAO the perfect user-DAO fit has been computed.
+
+## Conversion Rate Measure
+As a proof of concept we have a built in meachanism for tracking the conversion rate of the new members who could be acquired by sending the inventation via the Airdrop-Tool.
+
+
+# NFT Recommendation
+As the NFT market has been growing incredibly fast over the last years, the amount of NFTs are overwhelming for the users in the space. As in Web2 a recommendation engine is the way to bring structure and overview back into the space and hence enhancing the user experience.
+
+## Machine Learning Pipline
+We are using state-of-the-art machine learning techniques to build a powerful recommendation engine consisting of content-based filtering as well as collaborative filtering.
+
+# Prototype
+We have build a first prototype in [a link](https://github.com/user/repo/blob/branch/other_file.md)
 
 # Recommendation
 Using the embeddings, we build a recommendation engine above. 
