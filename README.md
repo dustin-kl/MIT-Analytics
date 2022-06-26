@@ -1,15 +1,15 @@
-
+# MIT-Analytics
 We fetch the publicly available data on the Ethereum Blockchain to build an analytics layer on top of it resulting in multiple products for different players in the ecosystem.
 
-# NFT_Airdrop
+## NFT_Airdrop
 Using the ethereum data we cluster users (wallet addresses) and find the perfect DAO for them. We are doing so by searching the NFTs the wallet address currently holds or previously held and match it with the topic of the DAO.
 
-## Airdrop Tool
+### Airdrop Tool
 We build a userfriendly [webpage interface](https://github.com/dustin-kl/MIT-Analytics/tree/master/NFT_Airdrop/KrauseHouse/krause_airdrop_app) for customizing the NFTs the DAOs can send as an inventation to their potential members.
 The Airdrop will be handled automatically by the smart contract we have deployed earlier on the ethereum blockchain.
 This Airdrop Tool can be found in the Krause House directory, as the Krause House was the first DAO the perfect user-DAO fit has been computed.
 
-## Conversion Rate Measure
+### Conversion Rate Measure
 As a proof of concept we have a built in meachanism for tracking the conversion rate of the new members who could be acquired by sending the inventation via the Airdrop-Tool.
 
 
