@@ -13,6 +13,9 @@ import { withStyles, makeStyles } from "@material-ui/core/styles";
 import styles from "./Test.module.css";
 import { mintNFT } from "./util/minter.js";
 import { pinJSONToIPFS } from "./util/pinata.js";
+import Link from 'next/link'
+import LockIcon from '@mui/icons-material/Lock';
+import swal from 'sweetalert2';
 
 const useStyles = makeStyles({
   root: {
@@ -45,6 +48,16 @@ export default function Home() {
     return raw;
   }
 
+  const not_implemented = () => {
+    swal.fire({
+      position: 'bottom-middle',
+      icon: 'error',
+      title: 'This function is not implemented yet!',
+      showConfirmButton: false,
+      timer: 3000
+    })
+  }
+
   async function execute() {
     const metadata = new Object();
     metadata.name = name;
@@ -53,6 +66,13 @@ export default function Home() {
 
     const pinataResponse = await pinJSONToIPFS(metadata);
     if (!pinataResponse.success) {
+      swal.fire({
+        position: 'bottom-middle',
+        icon: 'error',
+        title: 'Something went wrong',
+        showConfirmButton: false,
+        timer: 3000
+      })
       return {
         success: false,
         status: "😢 Something went wrong while uploading your tokenURI.",
@@ -62,9 +82,16 @@ export default function Home() {
 
     selectionModel.map((nft_id, index) => {
       const add = rows[nft_id]["address"];
-      const raw = mint(add);
+      const raw = mint(add, tokenURI);
       console.log("Raw: ", raw);
     });
+    swal.fire({
+      position: 'bottom-middle',
+      icon: 'success',
+      title: 'Your Airdrop was successfull',
+      showConfirmButton: false,
+      timer: 3000
+    })
   }
 
   const columns = [
@@ -397,18 +424,41 @@ export default function Home() {
           <button
             className={styles.btn2}
             style={{
+              opacity: "0.3",
               height: "120px",
               width: "350px",
               fontSize: "30px",
               marginRight: "30px",
               fontFamily: "SK Cuber",
             }}
-            onClick={() => execute()}
+            onClick={() => not_implemented()}
           >
             Track Conversion
+            {/* <Link href="/Dashboard">
+              <a>Track Conversion</a>
+            </Link> */}
+            <LockIcon
+              style={{
+                'color': "FF005B",
+                position: "left",
+                'height': "120px",
+                'width': "350px",
+                'z-index': "2",
+              }} /><br></br>
           </button>
         </div>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            flexDirection: "column",
+            marginBottom: "40px",
+            marginBottom: "40px",
+            height: "100px",
+          }}>
+        </div>
       </div>
-    </div>
+    </div >
   );
 }

@@ -1,6 +1,9 @@
 NFT_attributes.npz
 NFT_Collections.json
 
+/NFT_Airdrop/KrauseHouse/krause_airdrop_app/next.config.js
+/NFT_Recommendation/recommender_demo/next.config.js
+
 /NFT_Recommendation/data/*
 /NFT_Airdrop/data/*
 
