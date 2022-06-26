@@ -13,11 +13,11 @@ This Airdrop Tool can be found in the Krause House directory, as the Krause Hous
 As a proof of concept we have a built in meachanism for tracking the conversion rate of the new members who could be acquired by sending the inventation via the Airdrop-Tool.
 
 
-# NFT Recommendation
+## NFT Recommendation
 As the NFT market has been growing incredibly fast over the last years, the amount of NFTs are overwhelming for the users in the space. As in Web2 a recommendation engine is the way to bring structure and overview back into the space and hence enhancing the user experience.
 
-## Machine Learning Pipline
+### Machine Learning Pipline
 Using state-of-the-art machine learning models embedding the NFTs in an lower-dimensional space to capture the latent structure, we built a powerful recommendation engine consisting of content-based filtering as well as collaborative filtering. (see [NFT_Recommendation](https://github.com/dustin-kl/MIT-Analytics/tree/master/NFT_Recommendation))
 
-## Prototype
+### Prototype
 We have build a first prototype in [recommender_demo](https://github.com/dustin-kl/MIT-Analytics/tree/master/NFT_Recommendation/recommender_demo) that shows the recommendation constructed by the conten-base filtering of our recommendation engine.
